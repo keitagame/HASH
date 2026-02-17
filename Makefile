@@ -1,7 +1,9 @@
 AS = nasm
 ASFLAGS = -f bin
 
-all: bootloader.img
+all: bootloader.bin
+bootloader.bin: boot.bin stage2.bin
+	cat boot.bin stage2.bin > bootloader.bin
 
 bootloader.img: boot.bin stage2.bin
 	@echo "Creating bootloader image..."
