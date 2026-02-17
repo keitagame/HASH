@@ -3,6 +3,10 @@
 
 [BITS 16]
 [ORG 0x1000]
+boot_drive db 0
+BOOT_DRIVE equ 0x7C00 + 0x200
+
+
 
 KERNEL_OFFSET equ 0x10000   ; Load kernel at 1MB
 
@@ -80,7 +84,8 @@ load_kernel:
 
     ; Reset disk
     xor ah, ah
-    mov dl, [0x7C00 + boot_drive - start]
+    mov dl, [BOOT_DRIVE]
+    ;mov dl, [0x7C00 + boot_drive - start]
     int 0x13
 
     ; Load kernel (starting from sector 34, load 100 sectors)
@@ -93,7 +98,8 @@ load_kernel:
     mov ch, 0           ; Cylinder
     mov cl, 34          ; Sector
     mov dh, 0           ; Head
-    mov dl, [0x7C00 + boot_drive - start]
+    mov dl, [BOOT_DRIVE]
+    ;mov dl, [0x7C00 + boot_drive - start]
     int 0x13
 
     jc .error

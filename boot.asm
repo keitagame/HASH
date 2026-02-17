@@ -3,8 +3,12 @@
 
 [BITS 16]
 [ORG 0x7C00]
+BOOT_DRIVE equ 0x7C00 + 0x200
+
+
 
 start:
+    mov [BOOT_DRIVE], dl
     ; Setup segments
     cli
     xor ax, ax
