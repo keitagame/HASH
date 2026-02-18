@@ -1,7 +1,7 @@
 AS = nasm
 ASFLAGS = -f bin
 
-all: bootloader.bin
+all: bootloader.img
 bootloader.bin: boot.bin stage2.bin
 	cat boot.bin stage2.bin > bootloader.bin
 
